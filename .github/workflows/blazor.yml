@@ -51,5 +51,6 @@ jobs:
       - name: build and publish to github container registry
         working-directory: ./src/
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/blazor:latest -f Dockerfile.Blazor .
-          docker push ghcr.io/${{ github.repository_owner }}/blazor:latest
+          OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          docker build -t ghcr.io/$OWNER_LC/blazor:latest -f Dockerfile.Blazor .
+          docker push ghcr.io/$OWNER_LC/blazor:latest          
